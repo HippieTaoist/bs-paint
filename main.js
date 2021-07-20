@@ -1,6 +1,6 @@
 /*******************
  * OUR HELPER CODE *
-*******************/
+ *******************/
 
 /*
  * Here we add the squares to the canvas dynamically.
@@ -18,11 +18,11 @@
 const gridWidth = 10;
 let count = 0;
 while (count <= gridWidth * gridWidth) {
-  const canvas = document.querySelector('.canvas');
-  const div = document.createElement('div');
-  div.className = 'square color-5';
-  canvas.appendChild(div);
-  count++;
+    const canvas = document.querySelector('.canvas');
+    const div = document.createElement('div');
+    div.className = 'square color-5';
+    canvas.appendChild(div);
+    count++;
 }
 
 // You probably should NOT do these in the order below.
@@ -44,7 +44,7 @@ while (count <= gridWidth * gridWidth) {
 
 /***********
  * QUERIES *
-***********/
+ ***********/
 
 // Add queries for all your squares, palette colors, and brush here.
 // (Note the singular or plural used in that sentence!)
@@ -53,7 +53,7 @@ while (count <= gridWidth * gridWidth) {
 
 /****************************
  * EVENT LISTENER FUNCTIONS *
-****************************/
+ ****************************/
 
 // Now add some functions to handle clicking one particular square
 // and clicking one particular palette color. You can leave them
@@ -65,9 +65,34 @@ while (count <= gridWidth * gridWidth) {
 
 /**************************
  * WIRING IT ALL TOGETHER *
-**************************/
+ **************************/
 
 // Now: wiring up our event listeners to our html node elements.
 // You'll need to add the appropriate event listener for each
 // square and for each palette color from the functions you
 // wrote above.
+
+// Pallette Coloring
+let palletBox1 = document.querySelector('.color-1')
+let palletBox2 = document.querySelector('.color-2')
+let palletBox3 = document.querySelector('.color-3')
+let palletBox4 = document.querySelector('.color-4')
+let palletBox5 = document.querySelector('.color-5')
+
+// Set Pallette
+
+
+function setPalette(choice) {
+    if (choice === 1) {
+        palletBox1.style.backgroundColor = 'red'
+
+    }
+
+}
+setPalette(1)
+
+
+
+let CurrentPaintColor = document.querySelector('.current-brush')
+
+console.log(CurrentPaintColor)
