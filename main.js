@@ -75,44 +75,52 @@ while (count <= gridWidth * gridWidth) {
 
 
 // =========FLEX IT UP=========
-const app = document.querySelector('.app')
-    // app.style.justifyContent = 'space-evenly'
-    // app.style.alignContent = 'space-apart'
-app.style.flexDirection = 'column'
-app.style.border = 'red 3px solid'
 
+// Align .app in column
+const app = document.querySelector('.app')
+app.style.flexDirection = 'column'
+    // app.style.border = 'red 3px solid'
+
+// Align .headings in column format and center text within
 const headings = document.querySelector('.headings')
 headings.style.justifyContent = 'center'
 headings.style.flexDirection = 'column'
 headings.style.height = 'fit-content'
 headings.style.margin = 'auto'
 headings.style.textAlign = 'center'
-headings.style.border = 'blue 3px solid'
+    // headings.style.border = 'blue 3px solid'
 
-
-
+// Align .paint palette based on colors && palette img is ofset to left.
 const paint = document.querySelector('.paint')
 paint.style.justifyContent = 'center'
 paint.style.alignContent = 'space-evenly'
 paint.style.flexDirection = 'column'
 paint.style.margin = 'auto'
 paint.style.height = 'fit-content'
-paint.style.border = 'purple 3px solid'
+    // paint.style.border = 'purple 3px solid'
 
-const palette = document.querySelector('.palette palette-color')
-palette.style.border = 'yellow 3px solid'
-palette.style.justifyContent = 'center'
-
+// Align and center brush selection
 const brushSelection = document.querySelector('.brush-selection')
-    // brushSelection.style.justifyContent = 'center'
-    // brushSelection.style.alignContent = '
+brushSelection.style.justifyContent = 'center'
+brushSelection.style.width = 'fit-content'
 brushSelection.style.margin = 'auto'
 brushSelection.style.flexDirection = 'column'
-brushSelection.style.border = 'green 1px solid'
+    // brushSelection.style.border = 'green 5px solid'
 
+// center .palette in brush brushSelection
+const palette = document.querySelector('.palette')
+palette.style.justifyContent = 'center'
+    // palette.style.border = 'black 3px solid'
+
+// Center brush icon in brushSelection
+const brush = document.querySelector('.brush')
+brush.style.justifyContent = 'center'
+    // brush.style.border = 'black 3px solid'
+
+// Center canvas to app
 const canvasDisplay = document.querySelector('.canvas')
 canvasDisplay.style.justifyContent = 'center'
-canvasDisplay.style.alignContent = 'end'
+    // canvasDisplay.style.alignContent 
     // canvasDisplay.style.flexDirection = 'column'
 
 
