@@ -20,7 +20,7 @@ let count = 0;
 while (count <= gridWidth * gridWidth) {
     const canvas = document.querySelector('.canvas');
     const div = document.createElement('div');
-    div.className = 'square color-5';
+    div.className = 'square everWhite';
     canvas.appendChild(div);
     count++;
 }
@@ -73,8 +73,9 @@ while (count <= gridWidth * gridWidth) {
 // wrote above.
 
 
-
-// =========FLEX IT UP=========
+// ==================================
+// =========FLEX IT UP===============
+// ==================================
 
 // Align .app in column
 const app = document.querySelector('.app')
@@ -125,8 +126,9 @@ canvasDisplay.style.justifyContent = 'center'
 
 
 
-
-
+// ==================================
+// =========PALETTE COLORING=========
+// ==================================
 
 // Pallette Coloring
 let palletBox1 = document.querySelector('.color-1')
@@ -135,42 +137,77 @@ let palletBox3 = document.querySelector('.color-3')
 let palletBox4 = document.querySelector('.color-4')
 let palletBox5 = document.querySelector('.color-5')
 
+const style = document.createElement('style');
+
 // Set Pallette
 function setPalette(choice) {
+    // everWhite.style.backgroundColor = 'white';
     if (choice === 1) {
-        palletBox1.style.backgroundColor = 'red'
-        palletBox2.style.backgroundColor = 'orange'
-        palletBox3.style.backgroundColor = 'yellow'
-        palletBox4.style.backgroundColor = 'green'
-        palletBox5.style.backgroundColor = 'blue'
+
+        style.innerHTML = `
+            .color-1 { background-color: red; }
+            .color-2 { background-color: orange; }
+            .color-3 { background-color: yellow }
+            .color-4 { background-color: green }
+            .color-5 { background-color: blue }
+`;
+        // palletBox1.style.backgroundColor = 'red'
+        // palletBox2.style.backgroundColor = 'orange'
+        // palletBox3.style.backgroundColor = 'yellow'
+        // palletBox4.style.backgroundColor = 'green'
+        // palletBox5.style.backgroundColor = 'blue'
 
     }
 
 }
+document.head.appendChild(style);
+
+function setColor(divToSet) {
+    divToSet.backgroundColor = red
+}
 setPalette(1)
-let CurrentPaintColor = document.querySelector('.current-brush')
 
 
-// Color Choice
+// ==================================
+// =====PALETTE COLOR TRANSFERS======
+// ==================================
+
+// Connect currentPaintColor to  .current-brush
+let currentPaintColor = document.querySelector('.current-brush')
+console.log('currentPaintColor: ', currentPaintColor)
+
+// Connect colorChoice to .palette-color
 let colorChoice = document.querySelector('.palette')
-console.log(CurrentPaintColor)
+console.log('colorChoice:', colorChoice)
+console.log(palletBox1.style.backgroundColor)
 
+let currentColor = 'white'
 colorChoice.addEventListener('click', function(event) {
-    CurrentPaintColor.className = ('current-brush')
+    currentPaintColor.className = ('current-brush')
     let tempPaint = event.target
     let tempPaintNum = tempPaint.className[tempPaint.className.length - 1]
-    CurrentPaintColor.classList.add(`.color-${tempPaintNum}`)
-    console.log(CurrentPaintColor)
-})
-console.log(CurrentPaintColor)
+    currentColor = `color-${tempPaintNum}`
+    currentPaintColor.classList.add(currentColor)
+    console.log('currentPaintColor: ', currentPaintColor)
+});
 
 
 
 
 
 // Paint on Canvas
-let canvas = document.querySelector('.square')
-console.log(canvas)
+let canvas = document.querySelectorAll('.canvas')
+let square = document.querySelectorAll('.square')
+console.log(square)
+square.forEach(function(square) {
+    square.addEventListener('click', function() {
+        square.classList.replace('everWhite', currentColor)
+    })
+
+    square.addEventListener('mousedown', function() {
+        square.classList.replace('everWhite', currentColor)
+    })
+});
 
 
 
