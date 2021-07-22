@@ -196,18 +196,80 @@ colorChoice.addEventListener('click', function(event) {
 
 
 // Paint on Canvas
-let canvas = document.querySelectorAll('.canvas')
+let canvas = document.querySelector('.canvas')
 let square = document.querySelectorAll('.square')
-console.log(square)
-square.forEach(function(square) {
-    square.addEventListener('click', function() {
-        square.classList.replace('everWhite', currentColor)
-    })
 
-    square.addEventListener('mousedown', function() {
-        square.classList.replace('everWhite', currentColor)
+// on/Off Selector
+let mouseIsDown = 0
+
+//capture paint area to manipulate
+canvas.addEventListener('mouseenter', function(e) {
+
+    // change cursor in canvas
+    document.body.style.cursor = 'url(cursor.cur), auto';
+
+    // write to each square
+    square.forEach(function(square) {
+
+        square.addEventListener('mouseenter', function(e) {
+            square.style.border = 'none'
+        });
+
+        square.addEventListener('mouseleave', function(e) {
+            square.style.border = 'none'
+        });
+
+        // listen for mousedown  event and apply color
+        square.addEventListener('mousedown', function() {
+            mouseIsDown = 1
+            square.classList.replace(square.classList[1], currentColor)
+            square.style.border = 'black 5px solid'
+
+
+        })
+
+        square.addEventListener('mousemove', function() {
+            if (mouseIsDown === 1) {
+                square.classList.replace(square.classList[1], currentColor)
+                square.style.border = 'black 5px solid'
+            } else { square.style.border = 'none' }
+
+        })
+
+        square.addEventListener('mouseup', function() {
+            // let mouseIsDown = square.classList.toggle('mouse-is-down');
+            mouseIsDown = 0
+        })
     })
-});
+    canvas.addEventListener('mouseleave', function() {
+        document.body.style.cursor = 'default'
+    })
+    square.style.border = 'none'
+})
+
+// let mousedown = 0;
+// square.forEach(function(square) {
+//     // while (mousedown === 1) {
+//     //     square.classList.replace('everWhite', currentColor)
+//     // }
+//     square.addEventListener('mousedown', function() {
+
+
+//         let mouseIsDown = square.classList.toggle('mouse-is-down');
+
+//         if (mouseIsDown) {
+//             square.classList.replace(square.classList[1], currentColor)
+//             square.style.border = 'white 1px solid'
+//                 // mousedown = 1
+//         }
+//     })
+
+//     square.addEventListener('mouseup', function() {
+//             mousedown = 0
+//             square.style.border = 'none'
+//         })
+//         // }
+// });
 
 
 
