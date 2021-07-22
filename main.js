@@ -199,7 +199,7 @@ colorChoice.addEventListener('click', function(event) {
 let canvas = document.querySelector('.canvas')
 let square = document.querySelectorAll('.square')
 
-// on/Off Selector
+// on/Off Selectoring
 let mouseIsDown = 0
 
 //capture paint area to manipulate
