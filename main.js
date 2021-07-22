@@ -15,7 +15,7 @@
  * To make the second one happen, the number to change
  * is the first argument to `repeat`, currently set at 10.
  */
-const gridWidth = 10;
+const gridWidth = 50;
 let count = 0;
 while (count <= gridWidth * gridWidth) {
     const canvas = document.querySelector('.canvas');
@@ -138,35 +138,64 @@ let palletBox4 = document.querySelector('.color-4')
 let palletBox5 = document.querySelector('.color-5')
 
 const style = document.createElement('style');
-
-// Set Pallette
+let Gchoice = 0
+    // Set Pallette
 function setPalette(choice) {
     // everWhite.style.backgroundColor = 'white';
-    if (choice === 1) {
+    if (Gchoice === 0) {
+        Gchoice = 1
+    }
+    if (Gchoice === 1) {
 
         style.innerHTML = `
-            .color-1 { background-color: red; }
-            .color-2 { background-color: orange; }
+            .color-1 { background-color: red }
+            .color-2 { background-color: orange}
             .color-3 { background-color: yellow }
             .color-4 { background-color: green }
             .color-5 { background-color: blue }
+            .color-n { background-color: white}
 `;
-        // palletBox1.style.backgroundColor = 'red'
-        // palletBox2.style.backgroundColor = 'orange'
-        // palletBox3.style.backgroundColor = 'yellow'
-        // palletBox4.style.backgroundColor = 'green'
-        // palletBox5.style.backgroundColor = 'blue'
-
     }
+    if (Gchoice === 2) {
+
+        style.innerHTML = `
+            .color-1 { background-color: #faaa0b}
+            .color-2 { background-color: #705a44}
+            .color-3 { background-color:  #160a05}
+            .color-4 { background-color: #9c3404 }
+            .color-5 { background-color: #681804 }
+            .color-n { background-color: white}
+`;
+    }
+
+
 
 }
 document.head.appendChild(style);
 
-function setColor(divToSet) {
-    divToSet.backgroundColor = red
-}
-setPalette(1)
 
+let changePalette = document.querySelector('.palette-icon')
+
+// // grab the choice number from selection
+changePalette.addEventListener('click', function(e) {
+    if (Gchoice === 2) {
+        Gchoice = 1
+        setPalette(Gchoice)
+        console.log('Gchoice2 clicked');
+    } else {
+        Gchoice = 2;
+        setPalette(Gchoice)
+        console.log('Gchoice1 clicked');
+    }
+});
+
+
+
+
+
+
+
+setPalette(Gchoice)
 
 // ==================================
 // =====PALETTE COLOR TRANSFERS======
@@ -178,8 +207,6 @@ console.log('currentPaintColor: ', currentPaintColor)
 
 // Connect colorChoice to .palette-color
 let colorChoice = document.querySelector('.palette')
-console.log('colorChoice:', colorChoice)
-console.log(palletBox1.style.backgroundColor)
 
 let currentColor = 'white'
 colorChoice.addEventListener('click', function(event) {
@@ -189,11 +216,13 @@ colorChoice.addEventListener('click', function(event) {
     currentColor = `color-${tempPaintNum}`
     currentPaintColor.classList.add(currentColor)
     console.log('currentPaintColor: ', currentPaintColor)
+
 });
 
 
-
-
+// ==================================
+// =====CANVAS SETUP & PAINT IT======
+// ==================================
 
 // Paint on Canvas
 let canvas = document.querySelector('.canvas')
@@ -211,23 +240,24 @@ canvas.addEventListener('mouseenter', function(e) {
     // write to each square
     square.forEach(function(square) {
 
+        // clear square as entered - bug fix persistent border remainant
         square.addEventListener('mouseenter', function(e) {
             square.style.border = 'none'
         });
 
+        // clear square as exited - bug fix persistent border remainant
         square.addEventListener('mouseleave', function(e) {
             square.style.border = 'none'
         });
 
-        // listen for mousedown  event and apply color
+        // listen for mousedown  event and apply color && border feature
         square.addEventListener('mousedown', function() {
             mouseIsDown = 1
             square.classList.replace(square.classList[1], currentColor)
             square.style.border = 'black 5px solid'
-
-
         })
 
+        // continue with coloring if the mouse remains down.
         square.addEventListener('mousemove', function() {
             if (mouseIsDown === 1) {
                 square.classList.replace(square.classList[1], currentColor)
@@ -236,50 +266,15 @@ canvas.addEventListener('mouseenter', function(e) {
 
         })
 
+        // stop drawing on mouse release
         square.addEventListener('mouseup', function() {
             // let mouseIsDown = square.classList.toggle('mouse-is-down');
             mouseIsDown = 0
         })
     })
+
+    // return  cursor to normal when leaving canvas
     canvas.addEventListener('mouseleave', function() {
         document.body.style.cursor = 'default'
     })
-    square.style.border = 'none'
 })
-
-// let mousedown = 0;
-// square.forEach(function(square) {
-//     // while (mousedown === 1) {
-//     //     square.classList.replace('everWhite', currentColor)
-//     // }
-//     square.addEventListener('mousedown', function() {
-
-
-//         let mouseIsDown = square.classList.toggle('mouse-is-down');
-
-//         if (mouseIsDown) {
-//             square.classList.replace(square.classList[1], currentColor)
-//             square.style.border = 'white 1px solid'
-//                 // mousedown = 1
-//         }
-//     })
-
-//     square.addEventListener('mouseup', function() {
-//             mousedown = 0
-//             square.style.border = 'none'
-//         })
-//         // }
-// });
-
-
-
-// canvas.forEach((square, index) => {
-//     square.addEventListener('click', function() { console.log(square, index) })
-// })
-
-// canvas.forEach(function(square, index) => {
-
-//     canvas.addEventListener('click', function() {
-//         console.log(square, index)
-//     });
-// });
